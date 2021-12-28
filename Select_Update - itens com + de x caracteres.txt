@@ -1,0 +1,12 @@
+-- Comando para trazer itens que possuem mais de 50 caracteres no campo Descrição.
+
+
+select ds_item, ds_item_red from item where length(ds_item) > 50;
+
+
+
+update item set ds_item_red = ds_item
+where ch_ativo = 'T'
+and ch_excluido is null 
+and id_item not in 
+(select id_item from item where length(ds_item) > 50) 

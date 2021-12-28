@@ -1,0 +1,6 @@
+CONSULTAR PAGAMENTOS: select * from arqintegracao where ds_arquivo like '%RELATORIO_FINANCEIRO_PAGO%' order by dt_ref_ini
+
+CONSULTAR VENDAS: select * from arqintegracao where ds_arquivo like '%RELATORIO_VENDA_%'
+
+CONTA BANCARIA NO ARQUIVO "RELATORIO FINANCEIRO PAGO"
+8º Campo de tras pra frente Registro 11

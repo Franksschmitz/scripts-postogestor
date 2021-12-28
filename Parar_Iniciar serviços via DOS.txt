@@ -1,0 +1,12 @@
+====================================================================
+
+Comando via DOS para parar/iniciar o servidor do PostoGestor
+
+
+Acessar a pasta:
+
+C:\> PostoGestor/servidor/sistema>net stop PostoGestor_Servidor_1
+
+C:\> PostoGestor/servidor/sistema>net start PostoGestor_Servidor_1
+
+====================================================================

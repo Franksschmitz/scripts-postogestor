@@ -1,0 +1,39 @@
+--Comandos padrão para melhoria de performance de banco de dados Postgres:
+
+--OBS: Antes de executar qualquer comando, devem ser parados todos serviços do postogestor para não travar nenhuma tabela.
+
+
+
+
+--Sem estar conectado no banco de dados, rodar um vacuum completo:
+
+vacuumdb -z -f -v -p5450 ns_teste
+
+vacuumdb -z -f -v postogestor_taquara
+
+
+
+--Conectado ao banco desejado:
+
+vacuum full analyse verbose;
+
+
+--Conectado ao banco desejado:
+
+reindex database xx_teste_assuncao;
+
+
+
+--Reindexar apenas uma tabela com problema:
+
+reindex table docfiscal_item; 
+
+reindex index lote_idx_chave_temp;
+
+reindex index lote$rep_bl_lote_json_idx;
+
+
+
+--Rodar vacuum na tabela específica com problema:	
+
+vacuum full analyse verbose docfiscal_item;

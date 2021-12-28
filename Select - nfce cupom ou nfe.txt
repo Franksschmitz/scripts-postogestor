@@ -1,0 +1,14 @@
+===============================================================================================
+
+Comando para selecionar(localizar) uma nfce aberta pelo banco
+
+
+select ch_situac, ch_sitpdv, * from docfiscal 
+    where ch_situac = 'A' or ch_sitpdv = 'A'
+    and id_filial =:EMPRESA 
+    and ch_tipo <> 'NFE'
+    and dt_emissa between :DATA_INICIO and :DATA_FIM
+
+
+
+===============================================================================================

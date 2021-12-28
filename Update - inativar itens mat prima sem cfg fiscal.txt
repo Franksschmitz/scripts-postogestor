@@ -1,0 +1,17 @@
+=================================================================================================
+
+Update para alteração a situação de "Ativo" para "Inativo" nos itens do tipo "Matéria Prima" 
+e que não possuem Configuração Fiscal.
+
+-------------------------------------------------------------------------------------------------
+
+update item set ch_ativo = 'F'
+where id_item in (
+            select a.id_item from item a 
+            left join item_cfgfiscal b on (a.id_item = b.id_item) 
+            where a.ch_material = 'T' 
+            and b.id_cfgfiscal is null
+            )
+
+
+==================================================================================================

@@ -1,0 +1,21 @@
+
+-- Para criar setar permissão a um banco de dados especifico deverá estar logado no banco desejado com usuario POSTGRES
+
+CREATE USER nome_usuario WITH PASSWORD '123456';
+
+GRANT SELECT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO nome_usuario;
+GRANT CONNECT ON DATABASE nome_banco TO nome_usuario;
+GRANT USAGE ON SCHEMA public TO nome_usuario;
+
+
+-- Para conseguir dropar o usuário, será necessário remover todas as permissões antes.
+
+Comandos para remover as permissões:
+
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM nome_usuario;
+REVOKE CONNECT ON DATABASE nome_banco FROM nome_usuario;
+REVOKE USAGE ON SCHEMA public FROM nome_usuario;
+
+Comando para dropar:
+
+DROP USER nome_usuario;

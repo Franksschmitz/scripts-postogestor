@@ -1,0 +1,46 @@
+Comando remover regras de preço para reimportar:
+
+
+SET TERM ^ ;
+
+execute block
+as
+  declare variable ID_EMPRESA integer;
+begin
+  select first 1 ID_EMPRESA$LO from EMPRESA$LO where CH_LOCAL = 'T' into :ID_EMPRESA;
+  rdb$set_context('USER_TRANSACTION', 'ID_EMPRESA', :ID_EMPRESA);
+  delete from REGRAPRECO;
+  delete from IMPID where DS_TABELA = 'REGRAPRECO';
+end
+^
+---------
+
+SET TERM ; ^
+
+alter sequence GEN_REGRAPRECO restart with 0;
+alter sequence GEN_REGRAPRECO_APL restart with 0;
+alter sequence GEN_REGRAPRECO_CONDPAG restart with 0;
+alter sequence GEN_REGRAPRECO_ENTIDADE restart with 0;
+alter sequence GEN_REGRAPRECO_ESPECIE restart with 0;
+alter sequence GEN_REGRAPRECO_FILIAL restart with 0;
+alter sequence GEN_REGRAPRECO_GRUPOENT restart with 0;
+end
+^
+---------
+
+do $$declare
+declare nome varchar;
+begin
+nome='INATIVA';
+update REGRAPRECO set ds_regrapreco=ds_regrapreco ||' ' || nome;
+end$$;
+
+----------
+
+update REGRAPRECO set ch_excluido='T',ch_ativo='F'
+update REGRAPRECO_APL set ch_excluido='T',ch_ativo='F'
+update REGRAPRECO_ENTIDADE set ch_excluido='T'
+update REGRAPRECO_ESPECIE set ch_excluido='T'
+update REGRAPRECO_FILIAL set ch_excluido='T'
+update REGRAPRECO_GRUPOENT set ch_excluido='T'
+

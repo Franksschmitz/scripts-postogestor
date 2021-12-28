@@ -1,0 +1,24 @@
+
+-- Para verificar os documentos gerados que houveram alteração na sequência de número
+
+select g.ID_SERIEDOC, sd.DS_SERIEDOC, m.DS_MODDOC, g.DT_EMISSA, g.NR_DOCFISCAL, g.NR_DOCFISCAL_ANT, (g.NR_DOCFISCAL - 
+
+g.NR_DOCFISCAL_ANT - 1) as QT_FALHA, 
+(select count(1) from PREVENDA p where p.ID_SERIEDOC = g.ID_SERIEDOC and p.CH_EXCLUIDO is null and 
+p.NR_PREVENDA between g.NR_DOCFISCAL_ANT and g.NR_DOCFISCAL) as QT_PREVENDA 
+from (
+select d.ID_SERIEDOC, d.NR_DOCFISCAL, d.DT_EMISSA,
+(select max(d2.NR_DOCFISCAL) 
+from DOCFISCAL d2 where d2.NR_DOCFISCAL < d.NR_DOCFISCAL and d2.ID_SERIEDOC = d.ID_SERIEDOC and 
+d2.CH_EXCLUIDO is null) as NR_DOCFISCAL_ANT 
+from DOCFISCAL d
+where d.NR_DOCFISCAL is not null and d.CH_EXCLUIDO is null and
+not exists(select 1 from DOCFISCAL d1 where d1.ID_DOCFISCAL <> d.ID_DOCFISCAL and
+d1.NR_DOCFISCAL is not null and d1.CH_EXCLUIDO is null and d1.ID_SERIEDOC = d.ID_SERIEDOC and
+d1.NR_DOCFISCAL = (d.NR_DOCFISCAL -1))
+) g
+left join SERIEDOC sd on sd.ID_SERIEDOC = g.ID_SERIEDOC
+left join MODDOC m on m.ID_MODDOC = sd.ID_MODDOC
+group by 1, 2, 3, 4, 5, 6, 7, 8
+having (g.NR_DOCFISCAL - g.NR_DOCFISCAL_ANT - 1) > 0
+order by g.ID_SERIEDOC, g.NR_DOCFISCAL

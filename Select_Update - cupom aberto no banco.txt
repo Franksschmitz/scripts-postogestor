@@ -1,0 +1,40 @@
+******************************************************************************************************
+Comando para verificar se existe cupom aberto no banco
+
+Na Tabela doc_fiscal, os campos são CH_SITPDV, CH_SITUAC quando cancela, os dois ficam C se esta os dois como A, pode colocar os dois como C, se um dois dois esta como C, pode colocar como C também.
+
+
+select ch_situac, ch_sitpdv, * from docfiscal 
+where ch_situac = 'A' 
+and ch_tipo <> 'NFE' 
+and id_filial in (select id_empresa from empresa$lo where ch_local = 'T')
+
+======================================================================================================
+
+Alterar o cupom para "Cancelado";
+
+
+update docfiscal set ch_situac='C' where id_docfiscal='10755-6';
+
+update docfiscal set ch_sitpdv='C' where id_docfiscal='10755-6';
+
+
+
+******************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

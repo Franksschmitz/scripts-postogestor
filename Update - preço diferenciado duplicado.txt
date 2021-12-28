@@ -1,0 +1,17 @@
+====================================================================================================
+
+Update para ajustar preço diferenciado que está com regristro duplicado
+
+---------------------------------------------------------------------------------------------------
+
+update item_preco set ch_excluido = 'T'
+where id_item_preco in 
+   (
+   SELECT id_item_preco
+    FROM ITEM_PRECO
+    WHERE DH_ALTERACAO BETWEEN '2019-01-24' AND '2019-01-28'
+    AND ID_FILIAL = '37'
+      );
+
+
+---------------------------------------------------------------------------------------------------

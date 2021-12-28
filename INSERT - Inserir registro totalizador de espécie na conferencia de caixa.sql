@@ -1,0 +1,15 @@
+
+DO $$
+DECLARE 
+    empresa_lo INTEGER;
+    idseq BIGINT;
+BEGIN 
+    SELECT ID_EMPRESA$LO FROM EMPRESA$LO WHERE CH_LOCAL = 'T' LIMIT 1 INTO empresa_lo;
+
+
+    idseq = NEXTVAL('gen_caixapdv_fec');
+
+    INSERT INTO CAIXAPDV_FEC (ID_CAIXAPDV_FEC, ID_EMPRESA, ID_SEQ, DS_USUARIO, CH_EXCLUIDO, ID_CAIXAPDV, ID_ESPECIE, VL_VALOR, ID_CONTABAN, VL_SOBRA, VL_FALTA, VL_VALOR_ORI, VL_DIFERENCA, VL_TROCO_FIN)
+    VALUES (idseq || '-' || empresa_lo, empresa_lo, idseq, 'POSTGRES', NULL, '2302-2', '23-1', '1510', NULL, '0', '0' , '0', '1510', NULL);
+
+END$$;

@@ -1,0 +1,33 @@
+*****************************************************************************
+
+Comando para verificar no autosystem os clientes e produtos cadastrados.
+
+A flag pode ser I, A ou D
+
+I = Inativo
+A = Ativo
+D = Deletado
+
+Para tabela pessoa
+
+select count(*) from pessoa where flag='I';
+
+Para tabela produto
+
+select count(*) from produto where flag='A';
+
+
+update pessoa set pais='1058';
+
+
+******************************************************************************
+
+
+ALTER TABLE conta_corrente ALTER digito TYPE text; 
+ALTER TABLE conta_corrente_flow ALTER digito TYPE text; 
+ALTER TABLE conta_corrente ALTER agencia_digito TYPE text; 
+ALTER TABLE conta_corrente_flow ALTER agencia_digito TYPE text;
+
+
+
+******************************************************************************

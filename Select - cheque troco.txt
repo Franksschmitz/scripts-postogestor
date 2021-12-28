@@ -1,0 +1,24 @@
+=====================================================================================================
+
+Verificar status cheque troco e em qual caixa está:
+
+select * from titulo where NR_DOCUME = '181892'
+
+select * from titulo where id_titulo = '252-2'
+
+
+CH_STATUS
+FINANCEIRO 	= '1'
+CAIXA 		= '2'
+DESTINADO 	= '3'
+CANCELADO 	= '4'
+COMPENSADO	= '5'
+
+
+
+=====================================================================================================
+
+
+UPDATE titulo SET id_caixapdv = 'CODIGO CAIXA'
+    WHERE id_titulo = 'CODIGO CHEQUE'
+

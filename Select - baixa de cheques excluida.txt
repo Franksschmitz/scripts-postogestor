@@ -1,0 +1,5 @@
+Comando para verificar depósitos de cheques removidos e cheques dentro do deposito:
+
+select count(*) from compcheq where ch_excluido='T' and ch_recpag='R' 
+
+select count(*) from compcheq_recpag where ch_excluido='T'

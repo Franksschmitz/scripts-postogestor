@@ -1,0 +1,20 @@
+Comandos ajustar cpf na nota para rejeição pela contingência:
+
+Verificar total de notas sem cpf e rejeitadas:
+
+select count(*) from docfiscal where ds_cpfcnpj is null and id_filial='7' and id_docfiscal in (select id_docfiscal from docfiscal_eletro where ch_sitnfe = 'P')
+
+select count(*) from docfiscal where ds_cpfcnpj is null and id_filial='7' and id_docfiscal in (select id_docfiscal from docfiscal_eletro where ch_sitnfe = 'R')
+
+Ajustar com CPF desejado:
+
+update docfiscal set ds_cpfcnpj='70741654172' where ds_cpfcnpj is null and id_filial='7' and id_docfiscal in (select id_docfiscal from docfiscal_eletro where ch_sitnfe = 'P')
+
+update docfiscal set ds_cpfcnpj='70741654172' where ds_cpfcnpj is null and id_filial='7' and id_docfiscal in (select id_docfiscal from docfiscal_eletro where ch_sitnfe = 'R')
+
+Forçar aprovar após:
+
+update docfiscal_eletro set nr_tentativa = '0', dt_ult_tentativa = null where ch_sitnfe = 'R' and id_empresa='7'
+
+update docfiscal_eletro set nr_tentativa = '0', dt_ult_tentativa = null where ch_sitnfe = 'P' and id_empresa='7'
+

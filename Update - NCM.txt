@@ -1,0 +1,15 @@
+
+Comando para setar o NCM (Classificação fiscal) diretamente no cadastros de itens
+
+2574-1 = OUTROS
+
+=================================================================================================
+
+update item set id_classfiscal = '2574-1' where id_item in (
+
+select ID_ITEM from ITEM where CH_EXCLUIDO is null and (CH_REVENDA = 'T' or CH_PRODUTO = 'T' or CH_COMBUSTIVEL = 'T') and ID_CLASSFISCAL is null
+
+)
+
+=================================================================================================
+

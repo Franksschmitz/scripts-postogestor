@@ -1,0 +1,40 @@
+==================================================================================================
+
+Select para buscar no bd, pelo código de barras, os itens que estão duplicados:
+
+
+SELECT COUNT(*), 
+NR_CODBAR 
+FROM ITEM
+GROUP BY NR_CODBAR
+HAVING COUNT(NR_CODBAR) > 1;
+
+
+---------------------------------------------------------------------------------------------------
+
+
+Select para buscar no bd, pelo código de barras, os itens que estão duplicados que tiveram venda:
+
+
+SELECT
+COUNT(b.ID_ITEM), a.NR_CODBAR
+FROM ITEM a
+JOIN DOCFISCAL_ITEM b on a.ID_ITEM = b.ID_ITEM 
+GROUP BY a.NR_CODBAR
+HAVING COUNT(a.NR_CODBAR) > 1;
+
+
+==================================================================================================
+
+
+Select para buscar no bd, pelo CPF/CNPJ, as Entidades que estão duplicadas:
+
+
+SELECT COUNT(*), 
+DS_CPFCNPJ
+FROM ENTIDADE
+GROUP BY DS_CPFCNPJ
+HAVING COUNT(DS_CPFCNPJ) > 1;
+
+
+==================================================================================================

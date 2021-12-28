@@ -1,0 +1,7 @@
+
+
+-- Para alterar o nome de um bd, acessar o banco postgres e utilizar o seguinte comando:
+
+
+
+ALTER DATABASE base_demo RENAME TO xx_base_demo;

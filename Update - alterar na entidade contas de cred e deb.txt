@@ -1,0 +1,32 @@
+======================================================================================================
+
+-- Caso durante a importação das entidades seja configurados os planos de contas errados(ou na empresa) na aba "CONTABILIDADE" deve ser alterado com os comandos abaixo.
+
+======================================================================================================
+
+-- Campos;
+
+id_plano_c:   -- Plano de contas crédito
+id_plano_d:   -- Plano de contas débito
+id_planoad_c: -- Plano de contas adiantamentos crédito
+id_planoad_d: -- Plano de contas adiantamentos débito
+
+======================================================================================================
+
+-update entidade set id_planoad_c = '160-1', id_planoad_d = '161-1';
+
+update entidade set id_plano_c = '84-1', id_plano_d = '60-1';
+
+======================================================================================================
+
+-- Para alterar só as contas de crédito e débito:
+
+update entidade set id_plano_c = '317-1';
+
+======================================================================================================
+
+-- Para alterar só as contas de adiantamentos crédito e débito:
+
+update entidade set id_planoad_c = '531-1', id_planoad_d = '161-1';
+
+======================================================================================================

@@ -1,0 +1,48 @@
+==================================================================================================================
+
+script replicador daminelli:
+
+execute block as 
+begin
+
+UPDATE LOTE set ID_LOTE_SEQ = 999999 
+where DS_CHAVE_TEMP = '{6DEC9539-C953-48ED-A2BD-F0A5AC9A1B9A} - ID: 146604';
+
+UPDATE LOTE set ID_LOTE_SEQ = 146458 where DS_CHAVE_TEMP = '{7A87460A-72AE-45D3-B4DD-C0F1A781A4FA} - ID: 146606';
+
+UPDATE LOTE set ID_LOTE_SEQ = 146457 where DS_CHAVE_TEMP = '{6DEC9539-C953-48ED-A2BD-F0A5AC9A1B9A} - ID: 146604';
+end;
+
+
+-----------------------------------------------------------------------------------------------
+
+
+/ EXECUTAR NO BANCO PRINCIPAL COM O REPLICADOR PARADO /
+
+
+execute block as 
+
+begin
+
+update VERSAO set ULTIMO_LOTE_REP = 142708;
+
+end;
+
+
+
+/ EXECUTAR NO BANCO EMPRESAS COM O REPLICADOR PARADO /
+/* IMPORTANTE!!! NÃO EXECUTAR ESSE SCRIPT DO BANCO DO REPLICADOR SERVIDOR*/
+
+
+execute block as 
+begin
+
+delete from LOTE where ID_LOTE_SEQ > 142708 and CH_LIBERADO = 'T';
+
+end;
+
+
+
+/* INICIAR O REPLICADOR E AGUARDAR APLICAR TODOS OS LOTES ANTES DE LIBERAR O SISTEMA*/
+
+==================================================================================================================

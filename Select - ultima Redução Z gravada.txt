@@ -1,0 +1,6 @@
+
+
+
+Comando para conferir reduções z gravadas no sistema:
+
+select * from docecf where ds_tipo='RZ' and dt_movime='2018/06/04';

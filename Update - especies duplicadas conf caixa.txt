@@ -1,0 +1,19 @@
+====================================================================================================
+
+Para remover da conferência de caixa espécies duplicadas, desde que não estejam somando no total de vendas, utilizar os seguintes comandos:
+
+Tabela responsável: CAIXAPDV_FEC
+
+
+Comando para localizar os dados necessários:
+
+Select * from caixapdv_fec
+where id_caixapdv = '359-2'
+
+
+E para ajustar, usar o seguinte comando:
+
+Update caixapdv_fec set ch_excluido = 'T'
+where id_caixapdv_fec in ('2092-2', '2093-2', '2094-2', '2095-2', '2096-2', '2097-2')
+
+====================================================================================================

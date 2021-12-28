@@ -1,0 +1,49 @@
+=============================================================================================
+
+Formas de selecionar lançamentos de um determinado cliente:
+
+- Para trazer todos os lançamentos:
+
+select * from lanc
+where id_entidade = '3808-1'
+and id_especie = '3-1'
+and id_planoconta = '36-1'
+and id_empresa = '6'
+and ch_situac ='A'
+and dt_doc between '2018-09-01' and '2018-09-14'
+
+
+- Para trazer somente o valor total somado:
+
+select sum(vl_valor) lanc
+where id_entidade = '3808-1'
+and id_especie = '3-1'
+and id_planoconta = '36-1'
+and id_empresa = '6'
+and ch_situac ='A'
+and dt_doc between '2018-09-01' and '2018-09-14'
+
+
+- Para trazer a quantidade total de lançamentos:
+
+select count(*) from lanc
+where id_entidade = '3808-1'
+and id_especie = '3-1'
+and id_planoconta = '36-1'
+and id_empresa = '6'
+and ch_situac ='A'
+and dt_doc between '2018-09-01' and '2018-09-14'
+
+
+- Para alterar o status dos lançamentos selecionados de 'A' para 'R':
+
+update lanc 
+set ch_situac = 'R'
+where id_entidade = '3808-1'
+and id_especie = '3-1'
+and id_planoconta = '36-1'
+and id_empresa = '6'
+and ch_situac ='A'
+and dt_doc between '2018-09-01' and '2018-09-14'
+
+=============================================================================================

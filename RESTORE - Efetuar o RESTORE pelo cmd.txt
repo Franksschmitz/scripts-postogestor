@@ -1,0 +1,29 @@
+Efetuar o DUMB pelo cmd.exe:
+
+pg_dump -v NOME_BANCO > c:\Postogestor\NOME_BKP.pgzs
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Efetuar o RESTORE pelo cmd.exe:
+
+Abrir o cmd no diretório D:\Databases\PostgreSQL\server\bin> e rodar o comando abaixo:
+
+
+pg_restore.exe -v -h localhost -p 5450 -U postgres -W -d NOME_BANCO DIRETORIO_ARQUIVO_BKP
+
+
+Ex:
+
+pg_restore.exe -v -h localhost -p 5450 -U postgres -W -d sc_cirimbelli_replicador D:\Sistema\Replicadores\SC_CIRIMBELLI_PostoGestor\cirimbeli_replicador.pgz
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Caso ocorra um erro informando que o banco está no formato de texto, usar o comando seguindo o exemplo abaixo:
+
+
+psql -h localhost -p 5450 -U postgres -W -d NOME_BANCO -f DIRETORIO_ARQUIVO_BKP
+
+
+Ex:
+
+psql -h localhost -p 5450 -U postgres -W -d sc_cirimbelli_replicador -f D:\Sistema\Replicadores\SC_CIRIMBELLI_PostoGestor\cirimbeli_replicador.pgz

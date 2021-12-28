@@ -1,0 +1,56 @@
+Para ajustar um cartão que registrou com o modelo errado devido a erro de configuração do retorno TEF:
+
+Na tabela docfiscal_baixa
+
+Primeiro para conferir:
+
+select 
+  id_planoconta, 
+  id_bandeiratef, 
+  id_operatef, 
+  id_cartaotef 
+from docfiscal_baixa
+where nr_autorizacao = '058885' 
+and id_planoconta = '53-1'
+and id_operatef = '135-1'
+and id_bandeiratef = '6-1'
+and id_cartaotef = '6-1'
+
+Depois:
+
+update docfiscal_baixa 
+set id_planoconta = '46-1', id_operatef = '135-1', id_bandeiratef = '29-1', id_cartaotef = '48-1'
+where nr_autorizacao = '058885' 
+and id_planoconta = '53-1'
+and id_operatef = '135-1'
+and id_bandeiratef = '6-1'
+and id_cartaotef = '6-1'
+
+=====================================================================================================================
+
+Na tabela concirecpag
+
+Primeiro para conferir:
+
+select 
+  id_bandeiratef, 
+  id_operatef, 
+  id_cartaotef 
+from concirecpag
+where nr_autorizacao = '058885' 
+and id_operatef = '135-1'
+and id_bandeiratef = '6-1'
+and id_cartaotef = '6-1'
+
+Depois:
+
+update concirecpag
+set id_operatef = '135-1', id_bandeiratef = '29-1', id_cartaotef = '48-1'
+where nr_autorizacao = '058885' 
+and id_operatef = '135-1'
+and id_bandeiratef = '6-1'
+and id_cartaotef = '6-1'
+
+
+
+=====================================================================================================================

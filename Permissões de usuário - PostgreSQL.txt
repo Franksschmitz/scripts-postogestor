@@ -1,0 +1,21 @@
+================================================================
+
+Comando Criar usuário PostgreSQL:
+
+CREATE USER sistema WITH PASSWORD '19983101';
+CREATE USER replicador WITH PASSWORD '19983101';
+
+
+GRANT SELECT,UPDATE,INSERT,DELETE ON ALL TABLES IN SCHEMA public TO sistema;
+GRANT SELECT,UPDATE,INSERT,DELETE ON ALL TABLES IN SCHEMA public TO replicador;
+
+GRANT USAGE,SELECT,UPDATE ON ALL SEQUENCES IN SCHEMA public TO sistema;
+GRANT USAGE,SELECT,UPDATE ON ALL SEQUENCES IN SCHEMA public TO replicador;
+
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public to sistema;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public to replicador;
+
+
+
+
+

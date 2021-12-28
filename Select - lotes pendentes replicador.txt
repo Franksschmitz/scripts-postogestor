@@ -1,0 +1,35 @@
+﻿-- Comando para verificar a quantidade de lotes pendentes de aplicação no banco de dados
+
+
+banco de Movimento Firebird:
+  
+select count(1) from rep$log where nr_lote is null;
+
+banco Empresas Firebird:
+  
+select count(1) from LOTE where CH_LIBERADO_SERVIDOR is distinct from 'T';
+
+  
+banco Postgres:
+  
+select count(1) from LOTE$REP where CH_LIBERADO_SERVIDOR is distinct from 'T';
+
+select count(1) from LOTE$REP where CH_APLICADO is distinct from 'T';
+
+select count(1) from rep$log where nr_lote is null;
+
+
+================================================================================================
+
+Comando para verificar o tamanho do banco - Postgres:
+
+SELECT pg_size_pretty(pg_database_size('replicador_assuncao'));
+
+------------------------------------------------------------------------------------------------
+
+Comando para verificar o número do último lote:
+
+select count(1) from lote;
+
+================================================================================================
+

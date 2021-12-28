@@ -1,0 +1,13 @@
+
+******************************************************************************************************
+
+Comando para colocar o banco de dados em modo Online
+
+Erro possível no LOG:
+2017-09-05 10:10:22.980; ERRO: database C:/POSTOGESTOR/SERVIDOR/SISTEMA/BD/BANCO_TESTES.FDB shutdown
+
+Na pasta do Firebird instalado, executar:
+
+C:/Program Files/Firebird/Firebird_3_0>gfix -user sysdba -password 19983101 localhost:c:/postogestor/servidor/sistema/bd/TERRA_MTZ.FDB -online
+
+******************************************************************************************************

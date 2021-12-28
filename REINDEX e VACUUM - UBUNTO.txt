@@ -1,0 +1,13 @@
+Reindex e Vaccum em banco de dados Ubuntu:
+
+1 - Conectar pelo Putty con credenciais que TI da rede passar.
+2 - Executar o comando: export PGUSER=postgres
+3 - Conectar no banco de dados desejado: psql -h localhost -p5450 nomedobanco postgres
+4 - Executar comando do reindex: reindex database nome_do_banco
+5 - Esperar processo terminar, depois rodar o vacuum sem estar conectado ao banco: vacuumdb -z -f -v -p5450 nome_do_banco
+6 - Após terminar o vacuum, liberar serviços do sistema e conferir logs se tudo ok sem erro.
+
+
+Manual Ubunto - Tecnuv
+
+https://postogestor.com.br/helpdesk/_uploads/manuais/a5c4652c0d779cc1637abf8bc66a1d92.pdf

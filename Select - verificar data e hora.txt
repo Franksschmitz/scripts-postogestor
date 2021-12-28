@@ -1,0 +1,50 @@
+
+******************************************************************************************************
+
+Comando para verificar o horário do banco de dados no firebird
+
+select CURRENT_DATE as DATA_ATUAL, CURRENT_TIME as HORA_ATUAL from RDB$DATABASE;
+
+
+******************************************************************************************************
+
+Comando para Saber Horário e Data FireBird
+
+CURRENT_DATE e CURRENT_TIME – Retornam respectivamente a data e hora atual
+
+select CURRENT_DATE from rdb$database;
+
+CURRENT_DATE
+============
+2016-04-05
+
+select CURRENT_time from rdb$database;
+
+select CURRENT_time from rdb$database;
+
+ CURRENT_TIME
+=============
+16:16:27.0000
+
+******************************************************************************************************
+
+
+
+Comando para verificar o horário do banco de dados no Postgres:
+
+
+
+select now();
+ 
+ou
+ 
+select LOCALTIMESTAMP (0);
+
+
+Para alterar o fuso horário:
+
+select current_setting('TIMEZONE');
+
+alter database posto_testes set timezone to 'America/Sao_Paulo';
+
+SELECT EXTRACT(TIMEZONE_HOUR FROM now());

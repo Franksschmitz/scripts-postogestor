@@ -1,0 +1,1 @@
+delete from rep$log where nr_lote is null;

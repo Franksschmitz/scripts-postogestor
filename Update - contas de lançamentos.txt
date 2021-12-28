@@ -1,0 +1,29 @@
+=========================================================================================
+
+Para alterar em um lançamento apenas a conta de débito ou crédito, onde a conta não controla/gera saldo podemos usar:
+-----------------------------------------------------------------------------------------
+
+Desta forma simples:
+********************
+
+update lanc 
+set ID_PLANOCONTA='37-1'
+where ID_PLANOCONTA='1-1' 
+and CH_DEBCRE='D'
+and DH_LANC > '2018-08-26'
+
+
+Ou de um modo mais seguro:
+**************************
+
+update lanc 
+set ID_PLANOCONTA='37-1'
+where ID_LANC in 
+(
+select id_lanc from lanc
+where id_planoconta = '1-1'
+and ch_excluido is null
+and ch_debcre = 'D'
+)
+
+=========================================================================================

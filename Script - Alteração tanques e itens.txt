@@ -1,0 +1,50 @@
+=====================================================================================================
+
+SET TERM ^ ;
+
+execute block
+as
+  declare variable ID_EMPRESA integer;
+  declare variable ID_ITEM_ERRADO fk;
+  declare variable ID_LOCAL_ERRADO fk;
+  declare variable ID_LOCAL_CERTO fk;
+  declare variable ID_ITEM_CERTO fk;
+begin
+  select first 1 ID_EMPRESA$LO from EMPRESA$LO where CH_LOCAL = 'T' into :ID_EMPRESA;
+  rdb$set_context('USER_TRANSACTION', 'ID_EMPRESA', :ID_EMPRESA);
+  
+  :ID_EMPRESA = 27;
+  :ID_ITEM_ERRADO = '4714-1';
+  :ID_LOCAL_ERRADO = '100-1';
+  :ID_LOCAL_CERTO = '1-27';
+  :ID_ITEM_CERTO = '4712-1';
+  
+  update MOVEST_ITEM set 
+    ID_LOCALARM = :ID_LOCAL_CERTO,
+	ID_ITEM = :ID_ITEM_CERTO
+  where ID_LOCALARM = :ID_LOCAL_ERRADO and
+        ID_ITEM = :ID_ITEM_ERRADO and
+        ID_EMPRESA = :ID_EMPRESA and
+        CH_EXCLUIDO IS NULL; 
+		
+  update ABASTECIMENTO set
+    ID_LOCALARM = :ID_LOCAL_CERTO,
+	ID_ITEM = :ID_ITEM_CERTO
+  where ID_LOCALARM = :ID_LOCAL_ERRADO and
+        ID_ITEM = :ID_ITEM_ERRADO and
+        ID_EMPRESA = :ID_EMPRESA and 
+        CH_EXCLUIDO IS NULL;
+		
+  update DOCFISCAL_ITEM set 
+    ID_LOCALARM = :ID_LOCAL_CERTO,
+	ID_ITEM = :ID_ITEM_CERTO
+  where ID_LOCALARM = :ID_LOCAL_ERRADO and
+        ID_ITEM = :ID_ITEM_ERRADO and
+        ID_EMPRESA = :ID_EMPRESA and 
+        CH_EXCLUIDO IS NULL;             
+end
+^
+
+SET TERM ; ^
+
+=====================================================================================================

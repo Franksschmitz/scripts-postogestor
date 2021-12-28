@@ -1,0 +1,3 @@
+
+
+alter table entidade rename column ds_motbloqueado to ds_mot_bloqueado;

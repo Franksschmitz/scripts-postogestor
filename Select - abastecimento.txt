@@ -1,0 +1,13 @@
+
+******************************************************************************
+
+
+Para selecionar abastecimento pela id e por quantidade de abastecimento
+
+
+select * from abastecimento where id_abastecimento='88273-2';
+
+select * from abastecimento where qt_abastecimento='1124.5';
+
+
+******************************************************************************

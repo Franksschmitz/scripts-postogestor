@@ -1,0 +1,21 @@
+#PROCEDIMENTO PARA BANCO POSTGRES EM MODO SHUT DOWN
+
+Todos os comandos devem ser executados no cmd diretorio: 'C:PostoGestor/PostgresSQL/server/bin'
+
+#EXECUTAR COMANDO PARA COLOCAR MODO ONLINE: 
+
+	pg_ctl -D C:/PostoGestor/PostgreSQL/data start
+	(OUTRAS FUNCOES DO COMANDO: stop -s | restart -s)
+
+CASO EXIBA A SEGUINTE MENSAGEM: 
+
+	'C:/PostoGestor/PostgreSQL/data/pg_hba.conf': No such file or directory
+	FATAL:  could not load pg_hba.conf
+	LOG:  database system is shut down
+	
+TROCAR O ARQUIVO pg_hba.conf DA PASTA C:/PostoGestor/PostgreSQL/data/ 
+E EXECUTAR COMANDO NOVAMENTE
+
+#CASO NAO FUNCIONE NENHUM COMANDO A CIMA, EXECUTAR:
+	
+postgres.exe -D C:/PostoGestor/PostgreSQL/data/

@@ -1,0 +1,37 @@
+=============================================================================================
+
+Selecionar/localizar contas a receber via banco
+
+
+select * from lanc where ID_LANC = '48720-1'
+
+select * from lanc where NR_DOCUME = 'D54301-1'
+
+
+Editar nas tabelas:
+
+DT_BAIXA    - Remover
+DT_ULTBAI   - Remover
+VL_PAGO     - Remover
+VL_SALDO    - Colocar o valor que deve ficar em aberto
+CH_SITUAC   - Alterar de "L", para "A"
+
+
+=============================================================================================
+
+update LANC l set VL_PAGO =  
+(select sum(ld.VL_VALOR) from LANC_DET ld inner join CAMPO c on c.ID_CAMPO = ld.ID_CAMPO 
+ where ld.ID_LANC_BAI = l.ID_LANC and c.DS_IDENT = VL_PAGO and ld.CH_EXCLUIDO is null)
+where (l.CH_GERADO = 'T') and (l.CH_EXCLUIDO is null) and
+      (l.CH_SITUAC is distinct from 'N' or 
+      exists(select 1 from LANC_DET ld where ld.ID_LANC_BAI = l.ID_LANC and ld.CH_EXCLUIDO is null)) and      
+      (VL_PAGO is distinct from (select sum(ld.VL_VALOR) from LANC_DET ld
+       inner join CAMPO c on c.ID_CAMPO = ld.ID_CAMPO 
+       where ld.ID_LANC_BAI = l.ID_LANC and c.DS_IDENT = 'VL_PAGO' and ld.CH_EXCLUIDO is null));
+
+
+=============================================================================================
+
+
+
+

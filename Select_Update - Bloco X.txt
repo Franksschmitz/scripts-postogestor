@@ -1,0 +1,10 @@
+
+
+update ARQPAF set CH_EXCLUIDO='T' where ch_situac='R' and ds_tipo='RZ' and dt_ref='2019-03-15'
+
+select * from docecf where dt_movime='2018-03-29' and DS_TIPO='RZ'
+
+
+select * from arqpaf where nr_crz='CRZ'
+
+select * from docecf where nr_crz = 'CRZ'

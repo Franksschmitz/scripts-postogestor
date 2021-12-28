@@ -1,0 +1,62 @@
+******************************************************************************************************
+
+Comando verificar cartões não configurados já transacionados:
+
+select DH_EMISSAO, NR_OPERATEF, ID_OPERATEF, DS_TIPO_OPE, DS_CARTAO from tef_ope where id_cartaotef='1-1' order by DS_CARTAO;
+
+
+A coluna ID_CARTAOTEF deve ser o código do Modelo Padrão Cartão Não Configurado,
+onde o sistema traz todos os que não encontrou, nos resultados deve ser verificado as colunas:
+
+NR_OPERATEF= código de retorno da operadora que deve estar cadastrado no cadastro de operadora do sistema.
+
+DS_CARTAO= descrição do retorno do tef na operadora em questão para ser configurado no modelo do cartão.
+
+DS_TIPO_OPE= esta coluna irá ter o tipo do cartão retornado pelo TEF se é crédito ou débito.
+
+
+**********************************************************************************
+
+
+select 
+   a.DH_EMISSAO,
+   a.NR_OPERATEF,
+   a.ID_OPERATEF,
+   b.DS_OPERATEF,
+   a.DS_TIPO_OPE,
+   a.DS_CARTAO,
+   a.NR_BANDEIRA,
+   a.NR_BIN,
+   a.DS_VIAOPE
+from tef_ope as a 
+left join OPERATEF as b on (a.id_operatef = b.id_operatef)
+where a.id_cartaotef = '1-1' 
+order by 1;
+
+
+----------------------------------------------------------------------------------
+
+
+select 
+   a.DH_EMISSAO,   
+   a.ID_OPERATEF,
+   b.DS_OPERATEF,
+   a.NR_OPERATEF,
+   a.DS_VIAOPE,
+   a.NR_BIN,
+   a.DS_CARTAO,
+   a.NR_BANDEIRA,
+   e.VL_TOTAL,
+   a.DS_TIPO_OPE
+from tef_ope as a 
+left join OPERATEF as b on (a.id_operatef = b.id_operatef)
+left join docfiscal_baixa as c on (c.id_docfiscal_baixa = a.id_docfiscal_baixa)
+left join docfiscal as e on (e.id_docfiscal = c.id_docfiscal)
+left join especie as d on (d.id_especie = c.id_especie)
+where a.id_cartaotef='1-1' 
+and e.ch_situac = 'F'
+and e.ch_sitpdv = 'F'
+and d.ch_opetef = 'O'
+and a.nr_operatef = 'NUMERO OPERADORA'
+and a.ds_viaope like '%NOME AUTORIZADOR%'
+order by 1;

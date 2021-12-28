@@ -1,0 +1,11 @@
+Achar itens com barras na descrição:
+
+select * from item where ds_item like '%/%'
+select * from item where ds_item_red like '%/%'
+
+
+Alterar as descrições para ficarem iguais, porem sem a barra:
+
+UPDATE item SET ds_item = REPLACE(ds_item, '/', '') WHERE (ds_item LIKE '%/%')
+
+UPDATE item SET ds_item_red = REPLACE(ds_item_red, '/', '') WHERE (ds_item_red LIKE '%/%')

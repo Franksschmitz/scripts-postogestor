@@ -1,0 +1,6 @@
+
+
+select id_concirecpag from concirecpag where ch_excluido is null and nr_autorizacao =:AUTORIZACAO
+
+update conciven_det set ch_excluido = 'T' where id_concirecpag =:CODIGO
+

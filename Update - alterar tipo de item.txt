@@ -1,0 +1,19 @@
+=============================================================================================
+
+Comando para alterar o tipo de item desmarcando a flag "Revenda" e marcando a flag "Imobilizado", de um determinado grupo
+
+
+update item set ch_revenda = 'F', ch_imobilizado = 'T' where id_grupoitem = '4-1
+
+
+=============================================================================================
+
+
+
+ select * from item where ch_usoconsumo = 'T' and ch_revenda = 'T';
+
+
+ update item set ch_revenda = 'F' where ch_usoconsumo = 'T';
+
+
+=============================================================================================

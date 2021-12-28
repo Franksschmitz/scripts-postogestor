@@ -1,0 +1,6 @@
+select 
+	nr_notafi,
+	count(*) 
+from manifestacao 
+where id_filial = '46' 
+group by nr_notafi having count(*) > '1'

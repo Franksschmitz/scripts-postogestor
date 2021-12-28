@@ -1,0 +1,18 @@
+Ajustar tipo da entidade pelo tamanho dos campos:
+
+select ch_pessoa, ds_cpfcnpj, id_entidade, ds_entidade from entidade where length(ds_cpfcnpj) > 12 and ch_pessoa = 'F'
+
+update entidade set ch_pessoa = 'J' where length(ds_cpfcnpj) > 12 and ch_pessoa = 'F'
+
+
+
+Comando para conferir IE de pessoas físicas e tipo outras antes e depois:
+
+select distinct(ds_ie), id_entidade from entidade where ch_pessoa='F'
+select distinct(ds_ie), id_entidade from entidade where ch_pessoa='O'
+
+para ajustar geral todas pessoas físicas:
+
+update entidade set ds_ie=null where ch_pessoa='F' 
+update entidade set ds_ie=null where ch_pessoa='O' 
+

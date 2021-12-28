@@ -1,0 +1,31 @@
+Gerar o dump (réplica) pelo cmd:
+
+Acessar diretamente o bando pelo cmd e rodar o sequinte comando:
+
+pg_dump -v postogestor_palhocinha > c:\Postogestor\dump.pgz
+
+Restore pelo CMD.
+
+pg_restore --dbname=postgresql://postgres:19983101@127.0.0.1:5450/postogestor_mahle_sucot -v C:\postogestor\replica_sucot_53_19112020
+
+restore com --VERBOSE
+
+
+
+
+
+- Para criar o banco pode ser pelo configurador ou manual via linha de comando:
+createdb -h 127.0.0.1 -p 5450 --username=postgres -W -E 'UTF-8' -l 'pt_BR.UTF-8' --template=template0 <nome do banco>
+
+
+- Comando Criar usuario postgres manualmente:
+
+CREATE USER sistema WITH PASSWORD '19983101';
+CREATE USER replicador WITH PASSWORD '19983101';
+_____________________________________________
+COMANDO GERAR BKP PG:
+
+pg_dump --dbname=postgresql://postgres:19983101@127.0.0.1:5450/nome_banco --file=c:\postogestor\nome_banco.pgz --format=custom
+
+- trocar onde esta escrito NOME_BANCO pelo nome do banco de dados que for fazer bkp
+- onde esta o FILE= preencher o diretorio de onde sera gerado o arquivo de bkp
