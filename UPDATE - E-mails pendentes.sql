@@ -1,0 +1,1 @@
+update msgemail set ch_situac = 'C' where CH_SITUAC = 'P';
