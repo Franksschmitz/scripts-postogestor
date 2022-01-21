@@ -1,0 +1,13 @@
+Comando para backup e restore (gbak)
+
+Abrir o cmd na pasta do firebird e iniciar pelo comando:
+
+gbak -v -t -g -user sysdba -password 19983101 c:/postogestor/servidor/sistema/bd/FRATELLI_CRICI_SERVIDOR.FDB c:/postogestor/backup.fbk
+
+dai depois move o banco pro lado
+
+Após concluir essa parte, executar o comando a seguir:
+
+gbak -c -v -user sysdba -password 19983101 C:/PostoGestor_NS/servidor/sistema/bd/NS_MARACAJA.fbk c:\postogestor_ns\servidor\sistema\bd\ns_teste.FDB
+
+

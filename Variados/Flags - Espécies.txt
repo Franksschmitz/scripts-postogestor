@@ -1,0 +1,24 @@
+FLAG CH_TIPO_ESPECIE TABELA LANC
+
+NENHUM 		 = 'N';
+CHEQUE 		 = 'C';
+DINHEIRO 	 = 'D';
+ADIANTAMENTO     = 'A';
+VALE 		 = 'V';
+CARTAO 		 = 'T';
+CARTA_FRETE      = 'F';
+BOLETO 		 = 'B';
+DOACAO 		 = 'O';
+TITULO 		 = 'I';
+FIDELIDADE 	 = 'E';
+
+FLAG CH_STATUS TABELA TITULO
+
+FINANCEIRO 	= '1'
+CAIXA 		= '2'
+DESTINADO 	= '3'
+CANCELADO 	= '4'
+COMPENSADO 	= '5'
+
+
+

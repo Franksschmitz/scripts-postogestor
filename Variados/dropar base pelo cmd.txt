@@ -1,0 +1,7 @@
+Passo a passo para dropar base no PostgreSQL pelo cmd.exe
+
+1 - Parar todos os serviços do PostoGestor;
+2 - Acessar o diretório PostoGestor\PostgreSQL\server\bin e executar o cmd.exe como Administrador;
+3 - Digitar "b" e apertar na tecla Enter. Ao fazer isso, o cmd irá executar o arquivo bat que está dentro do PostgreSQL e listará os bancos de dados;
+4 - Digitar o comando "dropdb NOME_DO_BANCO" e apertar na tecla Enter e aguardar.
+5 - Digitar "b" e apertar na tecla Enter novamente, para atualizar a tela.

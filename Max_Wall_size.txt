@@ -1,0 +1,26 @@
+Caso ocorra as seguintes mensagens no Log do PostgreSQL durante um Restore:
+LOG: checkponts are ocurring too frequently (29 seconds apart)
+HINT: Consider increasing the configuration parameter "max_wal_size"
+
+A documentação do postgres manda aumentar o valor MAX_WAL_SIZE temporariamente para efetuar
+a restauração da base. Para isso siga os passos:
+
+Na pasta POSTGRESQL\DATA, alterar o arquivo POSTGRES.CONF e adicionar na ultima linha o parametro:
+max_wal_size = 5120
+
+Caso o parametro ja exista no arquivo, provavelmente estara comentado com um # na frente, basta descomentar
+e alterar para o valor desejado.
+
+Para verificar se alteração funcionou corretamente pode ser executado a seguinte consulta no banco de dados:
+
+SELECT NAME, SETTING FROM PG_SETTINGS
+WHERE (NAME LIKE '%wal_size%' OR NAME LIKE '%checkpoint%')
+ORDER BY NAME;
+
+Apos efetuar a alteração deve ser reiniciado o serviço do PostgreSQL, dropado o banco em que o erro ocorreu e
+iniciar um novo o restore.
+
+Ao finalizar a restauração do banco, o parametro MAX_WAL_SIZE deve ser obritaroriamente eliminado
+ou comentado (#) no arquivo POSTGRES.CONF e reiniciado serviço do PostgreSQL
+
+Documentação PostgreSQL: https://www.postgresql.org/docs/current/populate.html#POPULATE-CHECKPOINT-SEGMENTS

@@ -1,0 +1,3 @@
+Abrir o cmd.exe como administrador e executar o comando abaixo:
+
+taskkill /f /im postgres.exe

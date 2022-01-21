@@ -1,0 +1,20 @@
+execute block as
+  declare variable TABELA varchar(60);
+  declare variable TOTAL bigint;
+begin
+  for select rdb$relation_name from rdb$relations
+      where rdb$system_flag = 0 into :tabela 
+  do 
+  begin
+  
+    if (exists(select 1 from rdb$relation_fields where rdb$relation_name = :tabela and rdb$field_name = 'ID_SEQ')) then 
+    begin
+      execute statement 'select max(ID_SEQ) from ' || :tabela into :TOTAL;
+     
+      if (exists(select 1 from rdb$generators where rdb$generators.RDB$GENERATOR_NAME = 'GEN_' || :tabela)) then 
+      begin   
+        execute statement 'set generator GEN_' || :tabela || ' to ' || coalesce(:TOTAL, 0);
+      end
+    end  
+  end
+end;

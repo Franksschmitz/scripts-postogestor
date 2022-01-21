@@ -1,0 +1,8 @@
+
+parar os serviços do sistema
+
+parar o postgresql
+
+abrir cmd como adm
+
+taskkill /f /im postgres.exe

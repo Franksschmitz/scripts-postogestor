@@ -1,0 +1,4 @@
+select c.* 
+from prevenda p
+left join comanda c on c.id_comanda = p.id_comanda
+where p.id_comanda is not null order by nr_comanda desc 

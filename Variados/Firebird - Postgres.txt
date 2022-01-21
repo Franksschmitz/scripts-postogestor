@@ -1,0 +1,19 @@
+===================================================================================================
+
+Roda esse comando no banco postgres, pelo configurador e salva tudo:
+
+CREATE SEQUENCE public.gen_caixacfg_usu;
+
+
+depois roda esse no mesmo lugar:
+
+select proc_atualiza_geradores();
+
+
+===================================================================================================
+
+
+
+02.03.001.0002
+
+02.01.001.0008.0001

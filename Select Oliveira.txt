@@ -1,0 +1,27 @@
+select 
+   a.id_lanc,
+   a.dh_lanc,
+   b.id_titulo,
+   a.nr_docume,
+   a.vl_valor
+from lanc a
+left join titulo b on a.id_titulo_ref = b.id_titulo
+where a.nr_docume is null
+and a.id_titulo_ref is not null
+and a.ch_excluido is null
+and b.ch_excluido is null
+--and b.id_titulo in ( select id_titulo from titulo where ch_status = '2' )
+
+
+select 
+   a.id_lanc,
+   a.dh_lanc,
+   b.id_titulo,
+   a.nr_docume,
+   a.vl_valor
+from lanc a
+left join titulo b on a.id_titulo_ref = b.id_titulo
+where a.ch_excluido is null
+and b.ch_excluido is null
+and b.nr_docume = '41221'
+--and b.id_titulo in ( select id_titulo from titulo where ch_status = '2' )

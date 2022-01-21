@@ -1,0 +1,33 @@
+******************************************************************************************************
+
+Comando para conectar no banco de dados FireBird pelo CMD
+
+
+Comando para conectar no banco de dados FireBird:
+connect user password ;
+
+Exemplo Conexão Local:
+SQL> connect 'C:/Program Files/Firebird/Firebird_2_5/bin/teste.fdb' user sysdba password masterkey;
+Server version:
+WI-V2.5.4.26856 Firebird 2.5
+WI-V2.5.4.26856 Firebird 2.5/XNet (NOTEFABIANO)/P12
+WI-V2.5.4.26856 Firebird 2.5/XNet (NOTEFABIANO)/P12
+Database:  'C:/Program Files/Firebird/Firebird_2_5/bin/teste.fdb', User: sysdba
+
+Exemplo Conexão Via Rede:
+SQL> connect "192.168.1.143:/usr/local/erpposto/SISTEMA.FDB" user sysdba password masterkey;
+Server version:
+FB-V2.5.4.26856 Firebird 2.5
+FB-V2.5.4.26856 Firebird 2.5/tcp (servercomputer.bd)/P12
+WI-V2.5.4.26856 Firebird 2.5/tcp (NoteFabiano)/P12
+Database:  "192.168.1.143:/usr/local/erpposto/SISTEMA.FDB", User: sysdba
+
+Exemplo Conexão Via Rede com Porta Diferente:
+192.168.1.1/3051:/usr/local/bin/teste.fdb
+
+Exemplo de Conexão Externa:
+connect "storec.ddns.com.br:/usr/local/bin/teste.fdb" user sysdba password senhaaqui;
+connect "177.10.110.80/3050:C:/PostoGestor/servidor/sistema/bd/RODEIO.FDB" user sysdba password senhaaqui;
+
+
+******************************************************************************************************

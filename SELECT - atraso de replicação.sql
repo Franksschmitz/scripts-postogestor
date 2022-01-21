@@ -1,0 +1,13 @@
+-- CONSULTA ATRASO REPLICAÇÃO
+/*
+condição DH_LOTE_APL >= (CURRENT_DATE - 20)
+é pra mostrar so quem aplicou lote nos ultimos 20 dias 
+*/
+
+SELECT *, 
+    ((SELECT MAX(ID_LOTE_GER) FROM EMPRESA$LO) - ID_LOTE_APL) ATRASO
+FROM EMPRESA$LO
+WHERE DH_LOTE_APL >= (CURRENT_DATE - 20)
+ORDER BY ID_EMPRESA$LO
+
+

@@ -1,0 +1,70 @@
+Chamado Rodeio - Antecipação: 101017
+
+
+Comando para deletar lotes gerados não enviados ao replicador:
+
+delete from rep$log where nr_lote is null;
+
+
+Nome do arquivo.pgz: 
+
+base_partida_planoconta
+
+
+Revisão Base de Partida:
+
+- Tipo de lancto RECEBIMENTOS/PAGAMENTOS, ajustar a variável VL_JUROS.
+- Regras contábeis tipo de lancto Recebimentos Notas a Prazo, Vale troco.
+- Configurar todos novos tipos de modulos tef de pdv movel, add nas operadoras e bandeiras.
+- Configurar integração Ame Digital.
+- Criar Espécie Carteira Digital Padrão Sitef.
+- Atualizar base de partida tipo interno das espécies nota a prazo, catão POS debito e credito.
+- Revisão base de partida anotar sobre cadastro de impostos, icms desonerado e demais retidos.
+- Revisar todos os Tipos de Lançamentos.
+- Configurações fiscais PIS/COFINS para regime cumulativo e não cumulativo.
+- Configuração completa do DRE.
+- Adicionar o Código Interno nos modelos de cartões TEF/POS.
+- Separar especies de cheques(A Vista e A Prazo).
+- Configurar especie boleto para carteira de cobrança bancos.
+- Criar tipos de lancto padrões financeiros: contas a receber, pagar, adiatamentos, cheques, etc.
+
+
+
+Tipo lanctos Adicionados na base partida:
+
+Adiantamento a Cliente - Cartão POS Crédito
+Adiantamento a Cliente - Cartao POS Débito
+Adiantamento a Cliente - Cheque a Vista
+Adiantamento a Cliente - Cheque a Prazo
+Adiantamento a Cliente - Dinheiro
+Adiantamento a Fornecedores
+Ajuste de Saldo - Entrada
+Ajuste de Saldo - Saida
+Baixa - Notas a Prazo
+Baixa - Faturas a Receber
+Baixa - Contas a Pagar
+Entrada - Notas a Prazo
+Entrada - Contas a Pagar
+Entrada - Cheques a Vista
+Entrada - Cheques a Prazo
+Retorno Bancário - Cheques Custódia
+Retorno Bancário - PAGAMENTOS
+Retorno Bancário - Recebimentos
+
+
+Relatórios Personalizados já inseridos:
+
+Acumulado Financeiro Mes-Ano - Detalhado;
+Acumulado Mes-Ano - Detalhado;
+Itens Vendidos - NCM;
+Limite de Crédito;
+Projeção de Despesas - Detalhado;
+Despesas Pagas;
+Cartões Não Configurados;
+Posição - Contas a Receber;
+Espelho de Inventário;
+Espelho de Inventário - Financeiro;
+Detalhamento - Notas Fiscais de Terceiros;
+Intervenções;
+Quantidade de Vendas - Acumulado Item/Mês.
+

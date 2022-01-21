@@ -1,0 +1,6 @@
+Derrubar processos do windows do exe específico:
+
+IMPORTANTE: Esse comando vai derrubar TODOS os processos que estiverem rodando no windows.
+
+
+taskkill -f -im PGestor_Replicador.exe /t

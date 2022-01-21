@@ -1,0 +1,16 @@
+====================================================================================
+
+Erro de PK_SALDOCONTA$LO (ID_SEQ) tebela SALDOCONTA$LO no log do replicador_cliente
+
+Rodar no bd de movimento o seguinte comando e após reiniciar o replicador:
+
+execute block as
+declare liSeq bigint;
+begin
+  select max(ID_SEQ) from SALDOCONTA$LO into :liSeq;
+  
+  execute statement 'alter sequence GEN_SALDOCONTA$LO restart with ' || :liSeq;
+end;
+
+
+=====================================================================================

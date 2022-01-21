@@ -1,0 +1,13 @@
+-- Quando precisar liberar módulo CT-e e MDF-e para empresa sem base, só trocar o código da empresa ali no final do where
+
+do $$
+declare  
+  l_id_empresa integer;
+  l_id_seq bigint;
+begin
+  select ID_EMPRESA$LO from EMPRESA$LO where CH_LOCAL = 'T' limit 1 into l_id_empresa;
+  perform set_config('myvars.ID_EMPRESA', l_id_empresa::text, true); 
+  update EMPRESA set BL_CONF_REMOTO = 'AeGVBTbhKV84tDUjRBfcO5aX447rgGFcXMOUce/dXkwozH+0' where id_empresa = 51;
+end
+$$
+

@@ -1,0 +1,7 @@
+select nr_codbar , ltrim(nr_codbar, 'informar aqui o que quer remover'), * from item where id_item = '21-1'
+
+LTRIM() TRIM() RTRIM()
+
+
+update impid set old_id = trim(old_id) where old_id <> trim(old_id) and ds_tabela = 'ITEM';
+

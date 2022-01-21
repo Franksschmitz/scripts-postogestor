@@ -1,0 +1,16 @@
+
+3308 - EXCLUIR CAIXA IMPORTAÇÃO SELLER DUPLICADO
+
+1 - Localizar os códigos dos caixas que estão duplicados no processo de conferência de caixa 
+2 - Localizar no menu "Importações realizadas" o código da importação referente ao dia dos caixas 
+duplicados
+3 - Via configurador, localizar os caixas anotados no passo 1 e preencher o campo ID_IMPARQ com o 
+código da importação anotado no passo 2
+4 - Excluir a importação pelo processo "Importações realizadas"
+
+
+
+select id_imparq,* from caixapdv where id-caixapdv='1862-1'
+
+update caixapdv set id_imparq='481-1' where id_caixapdv='1862-1'
+update caixapdv set id_imparq='481-1' where id_caixapdv='1863-1'

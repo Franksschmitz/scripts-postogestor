@@ -1,0 +1,11 @@
+LISTAR SERVIÇOS WINDOWS:
+
+  sc queryex type= service state=all | find /i "PostoGestor_Replicador_Cliente"
+
+  sc queryex type= service state=all | find /i "PostoGestor_Replicador_Servidor"
+
+  sc queryex type= service state=all | find /i "PostoGestor_Servidor"
+  sc queryex type= service state=all | find /i "PostoGestor_Suporte"
+
+
+Cada um lista um tipo de servico, depois copia tudo para um txt e coloca net stop net start na frente

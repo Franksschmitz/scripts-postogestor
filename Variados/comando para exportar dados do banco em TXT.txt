@@ -1,0 +1,6 @@
+
+
+autosystem=# \o c:/empresas_sem_IE2.txt
+autosystem=# select count(*) from pessoa where tipo_pessoa='J' and inscr_est='';
+autosystem=# \o
+autosystem=#

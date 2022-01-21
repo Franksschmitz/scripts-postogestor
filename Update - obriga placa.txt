@@ -1,19 +1,12 @@
-**************************************************************************************
+--Comando para obrigar placa nos clientes que tiverem a espÃ©cie notas a prazo liberada
 
 
-Comando para obrigar placa nos clientes que tiverem a espécie notas a prazo liberada
-
-
-update ENTIDADE set ch_placa_obri = 'T'
-where id_entidade in 
-
-( SELECT a.id_entidade
-  FROM ENTIDADE a
-  JOIN ENTIDADE_ESP b on (a.id_entidade=b.id_entidade)
-  WHERE b.id_especie='3-1'
-  AND b.ch_liberado='T' 
-  AND b.ch_excluido is null
-) 
-
-
-**************************************************************************************
+UPDATE entidade SET ch_placa_obri = 'T'
+WHERE id_entidade IN (
+                       SELECT a.id_entidade
+                        FROM entidade a
+                        JOIN entidade_esp b ON (a.id_entidade = b.id_entidade)
+                        WHERE b.id_especie = '3-1'
+                        AND b.ch_liberado = 'T' 
+                        AND b.ch_excluido IS NULL
+                      ) 

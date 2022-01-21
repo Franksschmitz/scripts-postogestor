@@ -1,0 +1,16 @@
+/*
+
+Tu vai colocar o custo e custo medio correto, em todos os registros que existirem antes do primeiro registro que estiver com CH_MODCUS ='T', e tambem colocar o custo e custo médio correto nesse registro CH_MODCUS=T
+
+Depois que fizer isso, tu vai pegar a DT_MOVIME que está nesse primeiro registro com ch_modcus = 'T' e vai rodar esse update:
+
+*/
+
+UPDATE MOVEST_ITEM mi SET DT_PROCESSADA = NULL
+WHERE mi.DT_MOVIME >= :DT_MOVIME AND
+	mi.ID_FILIAL = :ID_FILIAL AND
+	mi.CH_EXCLUIDO IS NULL AND
+	mi.ID_ITEM = :ID_ITEM
+	
+/*
+À partir dai, o sistema vai reprocessar sozinho os custos e custo medio desse item dali pra frente, com base nas movimentações anteriores */

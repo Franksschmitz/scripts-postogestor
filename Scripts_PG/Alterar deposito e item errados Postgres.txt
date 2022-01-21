@@ -1,0 +1,47 @@
+SET TERM ^ ;
+
+do $$
+declare 
+  l_ID_EMPRESA integer;
+  l_ID_ITEM_ERRADO fk;
+  l_ID_LOCAL_ERRADO fk;
+  l_ID_LOCAL_CERTO fk;
+  l_ID_ITEM_CERTO fk;
+begin
+  select ID_EMPRESA$LO from EMPRESA$LO where CH_LOCAL = 'T' limit 1 into l_ID_EMPRESA;
+  perform set_config('myvars.ID_EMPRESA', l_id_empresa::text, true);  
+  
+  l_ID_EMPRESA = 27;
+  l_ID_ITEM_ERRADO = '4714-1';
+  l_ID_ITEM_CERTO = '4712-1';
+  l_ID_LOCAL_ERRADO = '100-1';
+  l_ID_LOCAL_CERTO = '1-27';      
+
+  update MOVEST_ITEM set 
+     ID_LOCALARM = l_ID_LOCAL_CERTO,
+     ID_ITEM = l_ID_ITEM_CERTO
+  where ID_LOCALARM = l_ID_LOCAL_ERRADO and
+        ID_ITEM = l_ID_ITEM_ERRADO and
+        ID_FILIAL = l_ID_EMPRESA and
+        CH_EXCLUIDO IS NULL; 
+        
+  update ABASTECIMENTO set
+    ID_LOCALARM = l_ID_LOCAL_CERTO,
+    ID_ITEM = l_ID_ITEM_CERTO
+  where ID_LOCALARM = l_ID_LOCAL_ERRADO and
+        ID_ITEM = l_ID_ITEM_ERRADO and
+        ID_EMPRESA = l_ID_EMPRESA and 
+        CH_EXCLUIDO IS NULL;
+        
+  update DOCFISCAL_ITEM set 
+    ID_LOCALARM = l_ID_LOCAL_CERTO,
+    ID_ITEM = l_ID_ITEM_CERTO
+  where ID_LOCALARM = l_ID_LOCAL_ERRADO and
+        ID_ITEM = l_ID_ITEM_ERRADO and
+        ID_EMPRESA = l_ID_EMPRESA and 
+        CH_EXCLUIDO IS NULL;         
+end
+$$
+^
+
+SET TERM ; ^
