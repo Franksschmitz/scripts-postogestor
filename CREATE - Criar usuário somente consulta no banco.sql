@@ -2,8 +2,9 @@
 
 --Empresa de BI:
 
-CREATE USER CONSULTA WITH PASSWORD '19983101';
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO CONSULTA;
+CREATE USER consulta WITH PASSWORD '19983101';
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO consulta;
 
 
 --já temos esse modelo na Rede Galo, e teremos tbm na Rede Brasil e Rede Mahle

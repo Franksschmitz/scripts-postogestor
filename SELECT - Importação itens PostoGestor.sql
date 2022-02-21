@@ -44,21 +44,49 @@ SELECT
         WHEN i.nr_cest = NULL THEN c.nr_cest
         ELSE i.nr_cest
     END AS CEST,
-    CASE
-        WHEN i.ch_combustivel = 'T' THEN 'C'
-        WHEN i.ch_usoconsumo = 'T' THEN 'U'
-        WHEN i.ch_material = 'T' THEN 'M'
-        WHEN i.ch_servico = 'T' THEN 'S'
-        WHEN i.ch_produto = 'T' THEN 'P'
-        WHEN i.ch_imobilizado = 'T' THEN 'I'
-        ELSE 'R'
-    END AS TIPO,
+    CAST((
+           SELECT
+                CASE
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,'             THEN 'R'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'C,'             THEN 'C'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'M,'             THEN 'M'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'U,'             THEN 'U'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'S,'             THEN 'S'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'P,'             THEN 'P'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'I'              THEN 'I'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,M,'           THEN 'R,M'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,P,'           THEN 'R,P'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'U,S,'           THEN 'U,S'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,U,'           THEN 'R,U'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,U,M,'         THEN 'R,U,M,'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,U,P,'         THEN 'R,U,P'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = 'R,M,P,'         THEN 'R,M,P'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = ''               THEN 'R'
+                    WHEN ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END)) = NULL             THEN 'R'
+                    ELSE ((CASE WHEN x.rev = 'T' THEN 'R,' ELSE '' END) || (CASE WHEN x.comb = 'T' THEN 'C,' ELSE '' END) || (CASE WHEN x.uso = 'T' THEN 'U,' ELSE '' END) || (CASE WHEN x.mat = 'T' THEN 'M,' ELSE '' END) || (CASE WHEN x.serv = 'T' THEN 'S,' ELSE '' END) || (CASE WHEN x.prod = 'T' THEN 'P,' ELSE '' END) || (CASE WHEN x.imob = 'T' THEN 'I' ELSE '' END))
+                END AS TP
+           FROM (   SELECT
+                        it.id_item AS COD,
+                        it.ch_revenda AS REV,
+                        it.ch_combustivel AS COMB,
+                        it.ch_usoconsumo AS USO,
+                        it.ch_material AS MAT,
+                        it.ch_servico AS SERV,
+                        it.ch_produto AS PROD,
+                        it.ch_imobilizado AS IMOB
+                    FROM item it
+                        WHERE it.ch_ativo = 'T'
+                        AND it.ch_excluido IS NULL 
+                ) x 
+                WHERE x.cod = i.id_item
+            ) AS VARCHAR(14)
+        ) AS TIPO,
     m.ds_marca AS NOME_MARCA,
     i.ch_estneg AS ESTOQUE_NEGATIVO,
-    CASE 
-        WHEN i.ch_limlocalarm = 'T' THEN 'S'
-        ELSE 'N'
-    END AS LIMITA_LOCAL_ARMAZENAGEM
+    CAST((CASE 
+            WHEN i.ch_limlocalarm = 'T' THEN 'S'
+            ELSE 'N'
+    END) AS VARCHAR(1)) AS LIMITA_LOCAL_ARMAZENAGEM
 FROM item i
 LEFT JOIN item_custo ic ON i.id_item = ic.id_item
 LEFT JOIN unidade uc ON i.id_unidade_e = uc.id_unidade

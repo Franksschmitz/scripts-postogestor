@@ -3,7 +3,7 @@
 
 CREATE USER nome_usuario WITH PASSWORD '123456';
 
-GRANT SELECT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO nome_usuario;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO nome_usuario;
 GRANT CONNECT ON DATABASE nome_banco TO nome_usuario;
 GRANT USAGE ON SCHEMA public TO nome_usuario;
 

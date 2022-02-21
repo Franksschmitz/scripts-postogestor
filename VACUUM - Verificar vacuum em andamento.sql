@@ -18,4 +18,4 @@ select pid, datname, query from pg_stat_activity where query like 'autovacuum%';
 
 Comando para matar o processo pelo pid:
 
-select pg_cancel_backend(pid_retornado_da_query_anterior);
+select pg_cancel_backend(5188);

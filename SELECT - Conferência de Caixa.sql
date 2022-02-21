@@ -1,0 +1,69 @@
+SELECT 
+    CAST( 'F' AS caracter ) AS SEL,
+    cp.ID_CAIXAPDV AS ID_CAIXAPDV,
+    e.DS_EMPRESA AS DS_EMPRESA,
+    cp.DT_ABERTURA AS DT_ABERTURA,
+    cp.HR_ABERTURA AS HR_ABERTURA,
+    cp.DT_FECHAMENTO AS DT_FECHAMENTO,
+    cp.HR_FECHAMENTO AS HR_FECHAMENTO,
+    cp.CH_SITUAC AS CH_SITUAC,
+    u.DS_NOME AS DS_NOME,
+    cp.CH_CONFERIDO AS CH_CONFERIDO,
+    cp.CH_COMPARTILHADO AS CH_COMPARTILHADO,
+    cp.NR_TURNO AS NR_TURNO,
+    cf.DS_CAIXACFG AS DS_CAIXACFG,
+    cf.CH_IMPDETESP_CONF AS CH_IMPDETESP_CONF,
+    cp.ID_CAIXACFG AS ID_CAIXACFG,
+    CAST(( SELECT SUM (COALESCE (cpf.VL_SOBRA,0)) FROM CAIXAPDV_FEC cpf 
+            JOIN ESPECIE e ON e.ID_ESPECIE = cpf.ID_ESPECIE AND e.CH_TIPO = 'D'
+                WHERE cpf.CH_EXCLUIDO IS NULL
+                AND cpf.ID_CAIXAPDV = cp.ID_CAIXAPDV ) AS DECIMAL (18,6)) AS VL_SOBRA,
+    CAST(( SELECT SUM (COALESCE (cpf.VL_FALTA,0)) FROM CAIXAPDV_FEC cpf
+            JOIN ESPECIE e ON e.ID_ESPECIE = cpf.ID_ESPECIE AND e.CH_TIPO = 'D'
+                WHERE cpf.CH_EXCLUIDO IS NULL 
+                AND cpf.ID_CAIXAPDV = cp.ID_CAIXAPDV) AS DECIMAL (18,6)) AS VL_FALTA,
+    (CAST (( SELECT SUM (COALESCE (cpf.VL_SOBRA,0)) FROM CAIXAPDV_FEC cpf 
+               JOIN ESPECIE e ON e.ID_ESPECIE = cpf.ID_ESPECIE AND e.CH_TIPO = 'D'
+                    WHERE cpf.CH_EXCLUIDO IS NULL 
+                    AND cpf.ID_CAIXAPDV = cp.ID_CAIXAPDV ) AS DECIMAL (18, 6))  - CAST (( SELECT SUM (COALESCE (cpf.VL_FALTA, 0)) FROM CAIXAPDV_FEC cpf 
+                                                                                             JOIN ESPECIE e ON e.ID_ESPECIE = cpf.ID_ESPECIE AND e.CH_TIPO = 'D'
+                                                                                                WHERE cpf.CH_EXCLUIDO IS NULL 
+                                                                                                AND cpf.ID_CAIXAPDV = cp.ID_CAIXAPDV) AS DECIMAL (18,6))) AS VL_SALDO,
+    ( SELECT
+        SUM(cp.VL_TOTAL) AS VL_VENDA
+      FROM ( SELECT di.VL_TOTAL FROM DOCFISCAL d
+              LEFT JOIN DOCFISCAL_ITEM di ON di.ID_DOCFISCAL = d.ID_DOCFISCAL
+              LEFT JOIN ITEM i ON i.ID_ITEM = di.ID_ITEM
+                WHERE d.CH_EXCLUIDO IS NULL
+                AND di.CH_EXCLUIDO IS NULL
+                AND d.CH_SITUAC = 'F'
+                AND d.CH_GERARECPAG = 'T'
+                AND d.ID_CAIXAPDV = cp.ID_CAIXAPDV ) cp ) AS VL_VENDA,
+    ( SELECT SUM(CASE
+                    WHEN l.CH_DEBCRE = 'D' THEN l.VL_VALOR
+                    ELSE -l.VL_VALOR 
+                  END) AS VL_VALOR  
+      FROM LANC l
+      LEFT JOIN PLANOCONTA p ON p.ID_PLANOCONTA = l.ID_PLANOCONTA
+      LEFT JOIN ESPECIE esp ON esp.ID_ESPECIE = l.ID_ESPECIE AND esp.CH_TIPO = 'D'
+      LEFT JOIN CAIXAPDV cai ON cai.ID_CAIXAPDV = l.ID_CAIXAPDV
+      LEFT JOIN CAIXACFG cfg ON cfg.ID_CAIXACFG = cai.ID_CAIXACFG
+        WHERE l.CH_EXCLUIDO IS NULL 
+        AND (l.ID_CAIXAPDV_ABE IS NULL OR (COALESCE (cfg.CH_SEPARA_TROCOINI, 'F') = 'F'))
+        AND (esp.CH_TIPO <> 'D' OR (p.ID_PLANOCONTA = cfg.ID_PLANOCONTA))
+        AND l.CH_MOVCAIXA = 'T'
+        AND l.ID_CAIXAPDV = cp.ID_CAIXAPDV
+        AND l.ID_ESPECIE = esp.ID_ESPECIE ) AS TOTAL_DINHEIRO,
+        cp.DS_OBS AS DS_OBS,
+        uconf.DS_NOME AS USUARIO_CONFERENCIA
+FROM CAIXAPDV cp 
+LEFT JOIN USUARIO u ON u.ID_USUARIO = cp.ID_USUARIO
+LEFT JOIN USUARIO uconf ON uconf.ID_USUARIO = cp.ID_USUARIO_CONF
+LEFT JOIN EMPRESA e ON e.ID_EMPRESA = cp.ID_FILIAL
+LEFT JOIN CAIXACFG cf ON cf.ID_CAIXACFG = cp.ID_CAIXACFG
+    WHERE (cp.CH_EXCLUIDO IS NULL)
+    AND (cp.ID_FILIAL IN ('27')
+    AND cp.CH_CONFERIDO = 'F')
+
+ORDER BY cp.DT_ABERTURA desc, cp.HR_ABERTURA desc 
+LIMIT 100
