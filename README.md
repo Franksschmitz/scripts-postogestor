@@ -1,0 +1,1 @@
+Códigos escritos em SQL, utilizando tabelas e campos específicos de um determinado sistema de gestão para postos de combustíveis, com intuito de auxiliar e ajudar a equipe de suporte e inúmeras situações.
